@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/mola.wav-038b13a3d2dc90bcaa069fd50a9904ad.sample"
+
+[deps]
+
+source_file="res://bunnyrunner_files/samples/mola.wav"
+dest_files=[ "res://.import/mola.wav-038b13a3d2dc90bcaa069fd50a9904ad.sample" ]
+
+[params]
+
+force/8_bit=true
+force/mono=true
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

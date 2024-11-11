@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/golden_carrot_sample.wav-0a59e852d499396782ac8723fb2384f4.sample"
+
+[deps]
+
+source_file="res://bunnyrunner_files/music/golden_carrot_sample.wav"
+dest_files=[ "res://.import/golden_carrot_sample.wav-0a59e852d499396782ac8723fb2384f4.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

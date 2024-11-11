@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/carrot.gd" type="Script" id=1]
+[ext_resource path="res://bunnyrunner_files/sprites/Items/carrot.png" type="Texture" id=2]
+
+[node name="carrot" type="Area2D"]
+
+editor/display_folded = true
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 1 )
+_sections_unfolded = [ "Collision" ]
+
+[node name="sprite" type="Sprite" parent="." index="0"]
+
+texture = ExtResource( 2 )
+
+[node name="poly" type="CollisionPolygon2D" parent="." index="1"]
+
+build_mode = 0
+polygon = PoolVector2Array( 26.8342, 33.7876, 8.81903, 25.2643, -5.90301, 11.8982, -15.976, 0.275574, -36.3156, -12.3156, -38.4465, -24.9069, -31.0854, -34.3987, -19.0754, -34.205, -3.77219, -34.0113, 38.6505, 18.4844, 36.1323, 33.5939 )
+
+[connection signal="body_entered" from="." to="." method="_on_carrot_body_entered"]
+
+

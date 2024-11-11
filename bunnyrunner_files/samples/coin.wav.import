@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/coin.wav-23b78ee504643daa6a510f7d87454ea7.sample"
+
+[deps]
+
+source_file="res://bunnyrunner_files/samples/coin.wav"
+dest_files=[ "res://.import/coin.wav-23b78ee504643daa6a510f7d87454ea7.sample" ]
+
+[params]
+
+force/8_bit=true
+force/mono=true
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,208 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Scripts/wingman.gd" type="Script" id=1]
+[ext_resource path="res://bunnyrunner_files/sprites/Enemies/wingMan1.png" type="Texture" id=2]
+[ext_resource path="res://bunnyrunner_files/sprites/Enemies/wingMan2.png" type="Texture" id=3]
+[ext_resource path="res://bunnyrunner_files/sprites/Enemies/wingMan3.png" type="Texture" id=4]
+[ext_resource path="res://bunnyrunner_files/sprites/Enemies/wingMan4.png" type="Texture" id=5]
+[ext_resource path="res://bunnyrunner_files/sprites/Enemies/wingMan5.png" type="Texture" id=6]
+[ext_resource path="res://bunnyrunner_files/samples/enemyhurt.wav" type="AudioStream" id=7]
+[ext_resource path="res://bunnyrunner_files/sprites/Particles/smoke.png" type="Texture" id=8]
+
+[sub_resource type="SpriteFrames" id=1]
+
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 46.6465, 31.533 )
+
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 34.625, 19.7553 )
+
+[sub_resource type="Animation" id=4]
+
+resource_name = "destroy"
+length = 1.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("smoke:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("smoke:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.25, 1 ),
+"update": 0,
+"values": [ Vector2( 0.0249224, 0.0249224 ), Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("smoke:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("smoke:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("sprite:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[node name="wingman" type="Node2D"]
+
+script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="sprite" type="AnimatedSprite" parent="." index="0"]
+
+frames = SubResource( 1 )
+animation = "default"
+_sections_unfolded = [ "Visibility" ]
+
+[node name="body" type="Area2D" parent="." index="1"]
+
+editor/display_folded = true
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision" ]
+
+[node name="shape" type="CollisionShape2D" parent="body" index="0"]
+
+position = Vector2( -2.37167, 31.3588 )
+shape = SubResource( 2 )
+
+[node name="head" type="Area2D" parent="." index="2"]
+
+editor/display_folded = true
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision" ]
+
+[node name="shape" type="CollisionShape2D" parent="head" index="0"]
+
+position = Vector2( -2.37167, -22.3094 )
+scale = Vector2( 1, 0.760752 )
+shape = SubResource( 3 )
+
+[node name="hurt" type="AudioStreamPlayer2D" parent="." index="3"]
+
+stream = ExtResource( 7 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "fx"
+area_mask = 1
+
+[node name="smoke" type="Node2D" parent="." index="4"]
+
+editor/display_folded = true
+visible = false
+scale = Vector2( 0.0249224, 0.0249224 )
+_sections_unfolded = [ "Visibility" ]
+
+[node name="smoke" type="Sprite" parent="smoke" index="0"]
+
+position = Vector2( -118.259, -74.3065 )
+texture = ExtResource( 8 )
+
+[node name="smoke2" type="Sprite" parent="smoke" index="1"]
+
+position = Vector2( -105.028, 49.1886 )
+texture = ExtResource( 8 )
+
+[node name="smoke3" type="Sprite" parent="smoke" index="2"]
+
+position = Vector2( 123.585, -62.5451 )
+texture = ExtResource( 8 )
+
+[node name="smoke4" type="Sprite" parent="smoke" index="3"]
+
+position = Vector2( 2.29541, -79.4522 )
+texture = ExtResource( 8 )
+
+[node name="smoke5" type="Sprite" parent="smoke" index="4"]
+
+position = Vector2( -1.38004, 89.6186 )
+texture = ExtResource( 8 )
+
+[node name="smoke6" type="Sprite" parent="smoke" index="5"]
+
+position = Vector2( 93.4466, 55.0693 )
+texture = ExtResource( 8 )
+
+[node name="anim" type="AnimationPlayer" parent="." index="5"]
+
+root_node = NodePath("..")
+autoplay = ""
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/destroy = SubResource( 4 )
+blend_times = [  ]
+
+[connection signal="body_entered" from="body" to="." method="_on_body_body_entered"]
+
+[connection signal="body_entered" from="head" to="." method="_on_head_body_entered"]
+
+

@@ -1,0 +1,180 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Scripts/game.gd" type="Script" id=1]
+[ext_resource path="res://scenes/stage_button.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/coin_counter.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/power_up_bar.tscn" type="PackedScene" id=4]
+[ext_resource path="res://bunnyrunner_files/Chocolate Bar Demo.otf" type="DynamicFontData" id=5]
+[ext_resource path="res://bunnyrunner_files/sprites/HUD/cross.png" type="Texture" id=6]
+[ext_resource path="res://bunnyrunner_files/music/Victory.ogg" type="AudioStream" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+
+size = 350
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 5 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="Animation" id=2]
+
+resource_name = "count"
+length = 1.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ "3", "2", "1" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[node name="game" type="Node"]
+
+script = ExtResource( 1 )
+
+[node name="HUD" type="Node2D" parent="." index="0"]
+
+[node name="stage_buttons" type="GridContainer" parent="HUD" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 567.0
+margin_top = 273.0
+margin_right = 1428.0
+margin_bottom = 854.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+columns = 1
+
+[node name="stage_button" parent="HUD/stage_buttons" index="0" instance=ExtResource( 2 )]
+
+music = "res://bunnyrunner_files/music/happy.ogg"
+stage_name = "stg00"
+
+[node name="HUD2" type="CanvasLayer" parent="." index="1"]
+
+editor/display_folded = true
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+
+[node name="controls" type="Node2D" parent="HUD2" index="0"]
+
+editor/display_folded = true
+visible = false
+
+[node name="coin_counter" parent="HUD2/controls" index="0" instance=ExtResource( 3 )]
+
+[node name="power_up_bar" parent="HUD2/controls" index="1" instance=ExtResource( 4 )]
+
+[node name="count_down" type="Node2D" parent="HUD2" index="1"]
+
+editor/display_folded = true
+visible = false
+position = Vector2( 960, 540 )
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+[node name="Label" type="Label" parent="HUD2/count_down" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 14.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 1 )
+text = "3"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_fonts" ]
+
+[node name="anim" type="AnimationPlayer" parent="HUD2/count_down" index="1"]
+
+root_node = NodePath("..")
+autoplay = ""
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/count = SubResource( 2 )
+blend_times = [  ]
+
+[node name="estage_exit" type="TextureButton" parent="HUD2" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1819.0
+margin_right = 1919.0
+margin_bottom = 100.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+texture_normal = ExtResource( 6 )
+expand = true
+stretch_mode = 3
+_sections_unfolded = [ "Textures" ]
+
+[node name="stream_victory" type="AudioStreamPlayer" parent="." index="2"]
+
+stream = ExtResource( 7 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+mix_target = 0
+bus = "Master"
+
+[node name="music" type="AudioStreamPlayer" parent="." index="3"]
+
+stream = null
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+mix_target = 0
+bus = "Master"
+
+[connection signal="pressed" from="HUD2/estage_exit" to="." method="_on_estage_exit_pressed"]
+
+
